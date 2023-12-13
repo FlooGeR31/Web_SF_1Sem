@@ -34,6 +34,6 @@ def recognition_img(url):
         res = res + ' ' + cl[1] + ' ' + str(round(cl[2], 2)) + ';'
     # Возвращаем строку
     return res[:-1]
-
+#new code
 app = FastAPI()
 classifier = pipeline("sentiment-analysis")
