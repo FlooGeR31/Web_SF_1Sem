@@ -36,7 +36,7 @@ def recognition_img(url):
     # Возвращаем строку
     return res[:-1]
 
-# new code
+# из библиотеки fastAPI воспользуемся методом для анализа настроений
 app = FastAPI()
 classifier = pipeline("sentiment-analysis")
 
