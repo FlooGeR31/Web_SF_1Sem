@@ -45,9 +45,3 @@ classifier = pipeline("sentiment-analysis")
 @app.get("/")
 def getRoot():
     return {"message": "Use POST + url to JPG image for recognition."}
-
-# Метод POST для корня
-@app.post("/")
-def postRoot(url: str):
-    # Запускаем функцию recognition_img передавая URL JPG картинки из запроса. Возвращаем строку с ТОП-3 классами, которые определила модель
-    return recognition_img(url)
