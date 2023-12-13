@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ```
 - Запустите приложение:
 ```
-uvicorn se_hw3_api:app
+uvicorn main:app
 ```
 - Отправьте запрос POST с URL JPG картинки, например:
 ```
@@ -53,7 +53,7 @@ curl -X 'POST' \
 - [Алёна](tg://abc) — Исследования, тестирование
 
 ## Источники
-https://metanit.com/python/fastapi/1.10.php
-https://habr.com/ru/articles/708678/
-https://blog.finxter.com/5-easy-ways-to-download-an-image-from-a-url-in-python/
-https://www.tensorflow.org/tutorials/load_data/images?hl=ru
+- https://metanit.com/python/fastapi/1.10.php
+- https://habr.com/ru/articles/708678/
+- https://blog.finxter.com/5-easy-ways-to-download-an-image-from-a-url-in-python/
+- https://www.tensorflow.org/tutorials/load_data/images?hl=ru
