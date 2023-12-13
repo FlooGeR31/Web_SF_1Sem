@@ -1,3 +1,4 @@
+from transformers import pipeline
 import requests
 from PIL import Image
 from tensorflow.keras.applications import EfficientNetB0
@@ -34,6 +35,13 @@ def recognition_img(url):
         res = res + ' ' + cl[1] + ' ' + str(round(cl[2], 2)) + ';'
     # Возвращаем строку
     return res[:-1]
-#new code
+
+# new code
 app = FastAPI()
 classifier = pipeline("sentiment-analysis")
+
+# Методы
+# Сообщение-заглушка для метода GET с инструкцией для метода POST
+@app.get("/")
+def getRoot():
+    return {"message": "Use POST + url to JPG image for recognition."}
