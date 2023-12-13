@@ -5,6 +5,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras.applications.efficientnet import decode_predictions
 import numpy as np
+from fastapi import FastAPI
 
 # def recognition(img_path):
 
@@ -33,3 +34,6 @@ def recognition_img(url):
         res = res + ' ' + cl[1] + ' ' + str(round(cl[2], 2)) + ';'
     # Возвращаем строку
     return res[:-1]
+#new code
+app = FastAPI()
+classifier = pipeline("sentiment-analysis")
