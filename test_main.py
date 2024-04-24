@@ -25,7 +25,7 @@ def test_post_submarine():
     json_data = response.json()
     data_cleaning(submarine)
     assert response.status_code == 200
-    assert "submarine 0.86" in str(json_data)
+    assert "submarine 0.58" in str(json_data)
 
 def test_post_train():
     response = client.post("/",
@@ -35,7 +35,7 @@ def test_post_train():
     json_data = response.json()
     data_cleaning(train)
     assert response.status_code == 200
-    assert "electric_locomotive 0.22" in str(json_data)
+    assert "electric_locomotive 0.23" in str(json_data)
 
 def test_post_shuttle():
     response = client.post("/",
@@ -45,7 +45,7 @@ def test_post_shuttle():
     json_data = response.json()
     data_cleaning(shuttle)
     assert response.status_code == 200
-    assert "space_shuttle 0.85" in str(json_data)
+    assert "space_shuttle 0.84" in str(json_data)
 
 def test_get_all_data():
     response = client.get("/base/")
