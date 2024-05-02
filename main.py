@@ -1,14 +1,14 @@
-from fastapi import FastAPI
-import json
 from pathlib import Path
-from transformers import pipeline
-import requests
 from PIL import Image
+import json
+import numpy as np
+import requests
+from transformers import pipeline
 from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras.applications.efficientnet import decode_predictions
-import numpy as np
+from fastapi import FastAPI
 
 DATAFILE_CONTENT = {"url1" : ["streetcar 0.74", 
                               "passenger_car 0.23", "electric_locomotive 0.02"]}
