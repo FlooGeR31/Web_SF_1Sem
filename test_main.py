@@ -8,14 +8,16 @@ client = TestClient(app)
 train = "https://static.independent.co.uk/2022/03/31/00/d0b722b78358bd1ddf031c75bdf52512Y29udGVudHNlYXJjaGFwaSwxNjQ4NzI3NDU3-2.42274411.jpg"
 shuttle = "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/MSNBC/Components/Photo/_new/121002_AtlantisPhoto-1045a_files.jpg"
 submarine = "https://anna-news.info/wp-content/uploads/2020/06/20/1400/nuclear-submarine-traveling-underwater-e1592642849265.jpg"
-# tram "Results: streetcar 0.74; passenger_car 0.23; electric_locomotive 0.02"
+# tram "Results: streetcar 0.74; passenger_car 0.23; 
+# electric_locomotive 0.02"
 # shuttle "Results: space_shuttle 0.96; warplane 0.01; airliner 0.0"
 # submarine "Results: submarine 0.89; missile 0.01; projectile 0.01"
 
 def test_get():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Use POST + url to JPG image for recognition."}
+    assert response.json() == {"message": 
+                               "Use POST + url to JPG image for recognition."}
 
 def test_post_submarine():
     response = client.post("/",
