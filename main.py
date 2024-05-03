@@ -76,7 +76,10 @@ def print_answer(url):
     global DATAFILE_CONTENT
     datafile_load()
     if url in DATAFILE_CONTENT:
-        return "This image was recognize. Result - " + DATAFILE_CONTENT[url][0] + "; " + DATAFILE_CONTENT[url][1] + "; " + DATAFILE_CONTENT[url][2] + "."
+        return "This image was recognize. Result - " + \
+            DATAFILE_CONTENT[url][0] + "; " + \
+            DATAFILE_CONTENT[url][1] + "; " + \
+            DATAFILE_CONTENT[url][2] + "."
     else:
         if check_is_image(url):
             set_new_record(url)
