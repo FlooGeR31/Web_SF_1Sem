@@ -116,4 +116,4 @@ def get_base():
 def post_root(url: str):
     # Запускаем функцию recognition_img передавая URL JPG картинки из запроса. Возвращаем строку с ТОП-3 классами, которые определила модель
     return print_answer(url)
-   # return recognition_img(url)
+   
