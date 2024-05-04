@@ -64,8 +64,8 @@ def recognition_img(url):
 
 
 # результат по массиву
-def result_to_array(str):
-    x = str.split("; ")
+def result_to_array(str_one):
+    x = str_one.split("; ")
     return x
 
 
