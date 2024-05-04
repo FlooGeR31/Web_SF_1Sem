@@ -13,7 +13,7 @@ import numpy as np
 DATAFILE_CONTENT = {"url1" : ["streetcar 0.74", "passenger_car 0.23", "electric_locomotive 0.02"]}
 DATAFILE_PATH = Path("./base.json")
 
-# загрузка файла
+
 def datafile_load():
     global DATAFILE_CONTENT
     global DATAFILE_PATH
@@ -29,7 +29,7 @@ def datafile_load():
 # Загружаем предварительно обученную модель EfficientNetB0
 model = EfficientNetB0(weights='imagenet')
 
-# анализ изображения для распознания
+
 def recognition_img(url):
     # Указываем путь к файлу с изображением, который будем использовать для сохранения файла и его использования
     img_path = 'image.jpg'
@@ -53,12 +53,12 @@ def recognition_img(url):
     # Возвращаем строку
     return res[:-1]
 
-# результат по массиву
+
 def result_to_array(str):
     x = str.split("; ")
     return x
 
-# записывает в файл информацию с URL
+
 def set_new_record(url):
     global DATAFILE_CONTENT
     global DATAFILE_PATH
@@ -76,7 +76,7 @@ def set_new_record(url):
     # Запись нового Json в файл
     return DATAFILE_CONTENT
 
-# печать ответа по результату
+
 def print_answer(url):
     global DATAFILE_CONTENT
     datafile_load()
@@ -89,7 +89,7 @@ def print_answer(url):
         else:
             return "This is not image."
 
-# проверка является ли URL изображением
+
 def check_is_image(url):
     try:
         Image.open(requests.get(url, stream=True).raw)
@@ -116,4 +116,4 @@ def get_base():
 def post_root(url: str):
     # Запускаем функцию recognition_img передавая URL JPG картинки из запроса. Возвращаем строку с ТОП-3 классами, которые определила модель
     return print_answer(url)
-   
+   # return recognition_img(url)
