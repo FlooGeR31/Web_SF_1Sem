@@ -1,14 +1,15 @@
-from pathlib import Path
-from PIL import Image
 import json
+from pathlib import Path
+
 import numpy as np
 import requests
-from transformers import pipeline
-from tensorflow.keras.applications import EfficientNetB0
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.efficientnet import preprocess_input
-from tensorflow.keras.applications.efficientnet import decode_predictions
 from fastapi import FastAPI
+from PIL import Image
+from tensorflow.keras.applications import EfficientNetB0
+from tensorflow.keras.applications.efficientnet import (decode_predictions,
+                                                        preprocess_input)
+from tensorflow.keras.preprocessing import image
+from transformers import pipeline
 
 DATAFILE_CONTENT = {"url1" : ["streetcar 0.74", 
                               "passenger_car 0.23", "electric_locomotive 0.02"]}
