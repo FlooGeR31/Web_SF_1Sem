@@ -10,8 +10,11 @@ from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras.applications.efficientnet import decode_predictions
 import numpy as np
 
-DATAFILE_CONTENT = {"url1" : ["streetcar 0.74", "passenger_car 0.23", "electric_locomotive 0.02"]}
+DATAFILE_CONTENT = {"url1": ["streetcar 0.74",
+                             "passenger_car 0.23",
+                             "electric_locomotive 0.02"]}
 DATAFILE_PATH = Path("./base.json")
+
 
 # загрузка файла
 def datafile_load():
@@ -26,18 +29,24 @@ def datafile_load():
         with open(DATAFILE_PATH, 'r') as f:
             DATAFILE_CONTENT = json.load(f)
 
+
 # Загружаем предварительно обученную модель EfficientNetB0
 model = EfficientNetB0(weights='imagenet')
 
+
 # анализ изображения для распознания
 def recognition_img(url):
-    # Указываем путь к файлу с изображением, который будем использовать для сохранения файла и его использования
+    # Указываем путь к файлу с изображением,
+    # который будем использовать для сохранения файла
+    # и его использования
     img_path = 'image.jpg'
     # Сохраняем JPG из полученного в запросе URL
-    img = Image.open(requests.get(url, stream = True).raw)
+    img = Image.open(requests.get(url, stream=True).raw)
     img.save(img_path)
 
-    # Загружаем изображение в память. EfficientNetB0 рассчитана на изображения размером 224х224
+    # Загружаем изображение в память.
+    # EfficientNetB0 рассчитана
+    # на изображения размером 224х224
     img = image.load_img(img_path, target_size=(224, 224))
     # Выполняем предварительную обработку изображения
     x = image.img_to_array(img)
@@ -53,10 +62,12 @@ def recognition_img(url):
     # Возвращаем строку
     return res[:-1]
 
+
 # результат по массиву
-def result_to_array(str):
-    x = str.split("; ")
+def result_to_array(str_one):
+    x = str_one.split("; ")
     return x
+
 
 # записывает в файл информацию с URL
 def set_new_record(url):
@@ -76,34 +87,45 @@ def set_new_record(url):
     # Запись нового Json в файл
     return DATAFILE_CONTENT
 
+
 # печать ответа по результату
 def print_answer(url):
     global DATAFILE_CONTENT
     datafile_load()
     if url in DATAFILE_CONTENT:
-        return "This image was recognize. Result - " + DATAFILE_CONTENT[url][0] + "; " + DATAFILE_CONTENT[url][1] + "; " + DATAFILE_CONTENT[url][2] + "."
+        return "This image was recognize. Result - "\
+            + DATAFILE_CONTENT[url][0]\
+            + "; " + DATAFILE_CONTENT[url][1] \
+            + "; " + DATAFILE_CONTENT[url][2] + "."
     else:
         if check_is_image(url):
             set_new_record(url)
-            return "Image recognizing... Result - " + DATAFILE_CONTENT[url][0] + "; " + DATAFILE_CONTENT[url][1] + "; " + DATAFILE_CONTENT[url][2] + "."
+            return "Image recognizing... Result - "\
+                + DATAFILE_CONTENT[url][0] \
+                + "; " + DATAFILE_CONTENT[url][1]\
+                + "; " + DATAFILE_CONTENT[url][2] + "."
         else:
             return "This is not image."
+
 
 # проверка является ли URL изображением
 def check_is_image(url):
     try:
         Image.open(requests.get(url, stream=True).raw)
         return True
-    except:
+    except Exception:
         return False
+
 
 app = FastAPI()
 classifier = pipeline("sentiment-analysis")
+
 
 # Сообщение-заглушка для метода GET с инструкцией для метода POST
 @app.get("/")
 def get_root():
     return {"message": "Use POST + url to JPG image for recognition."}
+
 
 # Метод GET для получения базы распознаных изображений
 @app.get("/base/")
@@ -111,9 +133,10 @@ def get_base():
     datafile_load()
     return DATAFILE_CONTENT
 
+
 # Метод POST для корня
 @app.post("/")
 def post_root(url: str):
-    # Запускаем функцию recognition_img передавая URL JPG картинки из запроса. Возвращаем строку с ТОП-3 классами, которые определила модель
+    # Запускаем функцию recognition_img передавая URL JPG картинки из запроса.
+    # Возвращаем строку с ТОП-3 классами, которые определила модель
     return print_answer(url)
-   
