@@ -102,9 +102,9 @@ def print_answer(url):
         if check_is_image(url):
             set_new_record(url)
             return "Image recognizing... Result - " + \
-            DATAFILE_CONTENT[url][0] + "; " + \
-            DATAFILE_CONTENT[url][1] + "; " + \
-            DATAFILE_CONTENT[url][2] + "."
+                DATAFILE_CONTENT[url][0] + "; " + \
+                DATAFILE_CONTENT[url][1] + "; " + \
+                DATAFILE_CONTENT[url][2] + "."
         else:
             return "This is not image."
 
@@ -138,7 +138,7 @@ def get_base():
 # Метод POST для корня
 @app.post("/")
 def post_root(url: str):
-    # Запускаем функцию recognition_img ,
-    # передавая URL JPG картинки из запроса. 
+    # Запускаем функцию print_answer,
+    # передавая URL JPG картинки из запроса.
     # Возвращаем строку с ТОП-3 классами, которые определила модель
     return print_answer(url)
