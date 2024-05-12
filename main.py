@@ -1,14 +1,15 @@
-from fastapi import FastAPI
 import json
 from pathlib import Path
-from transformers import pipeline
+
+import numpy as np
 import requests
+from fastapi import FastAPI
 from PIL import Image
 from tensorflow.keras.applications import EfficientNetB0
+from tensorflow.keras.applications.efficientnet import (decode_predictions,
+                                                        preprocess_input)
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.efficientnet import preprocess_input
-from tensorflow.keras.applications.efficientnet import decode_predictions
-import numpy as np
+from transformers import pipeline
 
 DATAFILE_CONTENT = {"url1": ["streetcar 0.74",
                              "passenger_car 0.23",
@@ -93,17 +94,17 @@ def print_answer(url):
     global DATAFILE_CONTENT
     datafile_load()
     if url in DATAFILE_CONTENT:
-        return "This image was recognize. Result - "\
-            + DATAFILE_CONTENT[url][0]\
-            + "; " + DATAFILE_CONTENT[url][1] \
-            + "; " + DATAFILE_CONTENT[url][2] + "."
+        return "This image was recognize.Result - " + \
+            DATAFILE_CONTENT[url][0] + "; " + \
+            DATAFILE_CONTENT[url][1] + "; " + \
+            DATAFILE_CONTENT[url][2] + "."
     else:
         if check_is_image(url):
             set_new_record(url)
-            return "Image recognizing... Result - "\
-                + DATAFILE_CONTENT[url][0] \
-                + "; " + DATAFILE_CONTENT[url][1]\
-                + "; " + DATAFILE_CONTENT[url][2] + "."
+            return "Image recognizing... Result - " + \
+            DATAFILE_CONTENT[url][0] + "; " + \
+            DATAFILE_CONTENT[url][1] + "; " + \
+            DATAFILE_CONTENT[url][2] + "."
         else:
             return "This is not image."
 
@@ -137,6 +138,7 @@ def get_base():
 # Метод POST для корня
 @app.post("/")
 def post_root(url: str):
-    # Запускаем функцию recognition_img передавая URL JPG картинки из запроса.
+    # Запускаем функцию recognition_img ,
+    # передавая URL JPG картинки из запроса. 
     # Возвращаем строку с ТОП-3 классами, которые определила модель
     return print_answer(url)
